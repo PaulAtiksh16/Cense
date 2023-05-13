@@ -1,4 +1,12 @@
 from gpiozero import MotionSensor
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/counter')
+def get_counter():
+    global counter
+    return render_template('counter.html', counter=counter)
 
 # Initialize motion sensors
 pir = MotionSensor(4)
@@ -20,6 +28,5 @@ def update_counter():
 pir.when_motion = update_counter
 pir2.when_motion = update_counter
 
-# Run an infinite loop to keep the script running
-while True:
-    pass
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', debug=True)
