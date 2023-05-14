@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from gpiozero import MotionSensor
 
 
@@ -24,14 +24,20 @@ pir.when_motion = update_counter
 
 
 app = Flask(__name__, template_folder='/home/admin/Desktop/Cense2.0/templates')
+
 @app.route('/')
 def index():
     global counter
     templateData = {
-      'title' : 'LIBRARY OCCUPANCY',
-      'occupancy': str(counter)
-      }
+        'title': 'LIBRARY OCCUPANCY',
+        'counter': counter
+    }
     return render_template('index.html', **templateData)
+
+@app.route('/counter')
+def get_counter():
+    global counter
+    return jsonify(counter=counter)
 
 if __name__ == '__main__':
     app.run(debug=True, port=80, host='0.0.0.0')

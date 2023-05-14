@@ -1,9 +1,23 @@
 <!DOCTYPE html>
+<html>
    <head>
       <title>{{ title }}</title>
+      <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+      <meta http-equiv="Pragma" content="no-cache">
+      <meta http-equiv="Expires" content="0">
    </head>
    <body>
       <h1>{{ title }}</h1>
-      <h2>The occupancy of the library is: {{ occupancy }}</h2>
+      <h2>The occupancy of the library is: <span id="counter"></span></h2>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+         $(document).ready(function() {
+            setInterval(function() {
+               $.getJSON('/counter', function(data) {
+                  $('#counter').text(data.counter);
+               });
+            }, 1000);
+         });
+      </script>
    </body>
 </html>
