@@ -15,6 +15,9 @@ pir2 = MotionSensor(17) #green sensor: 17
 
 # Define a function to read the sensor value and update the counter
 def update_counter():
+    print("in update")
+    print("Pir1:", pir.value)
+    print("Pir2:", pir.value)
     global counter
     global counterstr
     if pir.value == 1:
@@ -36,6 +39,10 @@ def update_counter():
     
 
 # Add an event listener for the sensor pins
+def motion_detection():
+    print("in motion detection")
+    
+    
 pir.when_motion = update_counter
 pir2.when_motion = update_counter
 
@@ -60,10 +67,15 @@ def get_counter():
 #     global counterstr
 #     print("Counter in task:", counterstr)
 #     ssd.SSD_show(counterstr)
+
+# ssdthread = threading.Thread(target=ssd.SSD_show, name="ssdthread", args=(counterstr,))
 # 
-# ssdthread = threading.Thread(target=ssdtaskfunc, name="ssdthread")
+# motionthread = threading.Thread(target=motion_detection, name="motionthread")
 
 if __name__ == '__main__':
+#     motionthread.start()
 #     ssdthread.start()
     app.run(debug=True, port=80, host='0.0.0.0')
 #     ssd.SSD_show(counterstr)
+
+#copytest

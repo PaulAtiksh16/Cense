@@ -74,7 +74,7 @@ class SevSegDisp():
       sel[i] = 1
       self.ssd_GPIO.output(self.selDigit, sel) # activates selected digit
       
-      print("Digit:", digit)
+#       print("Digit:", digit)
       
       if digit[i].replace(".", "") == ".": # space disables digit
        self.ssd_GPIO.output(self.display_list,0)
@@ -89,14 +89,14 @@ class SevSegDisp():
 
     def splitToDisplay (self, toDisplay): # splits string to digits to display
      
-     print("toDisplay:", toDisplay)
+#      print("toDisplay:", toDisplay)
      
      arrToDisplay=list(toDisplay)
      for i in range(len(arrToDisplay)):
       if arrToDisplay[i] == ".": arrToDisplay[(i-1)] = arrToDisplay[(i-1)] + arrToDisplay[i] # dots are concatenated to previous array element
      while "." in arrToDisplay: arrToDisplay.remove(".") # array items containing dot char alone are removed
      
-     print("ArrToDisplay:", arrToDisplay)
+#      print("ArrToDisplay:", arrToDisplay)
      
      return arrToDisplay
 
@@ -111,13 +111,17 @@ class SevSegDisp():
     def SSD_show(self, displayvar="0000"):
         try:
          self.gpio_init()
+         if displayvar is None or displayvar == "":
+             print("Displayvar is None")
+             displayvar = "0000"
          print("Displayvar:", displayvar)
-         while True:
-          self.showDisplay(self.splitToDisplay(displayvar))
-          time.sleep(0.01)
+#          while True:
+         self.showDisplay(self.splitToDisplay(displayvar))
+         time.sleep(0.01)
         except KeyboardInterrupt:
          print('interrupted!')
          self.ssd_GPIO.cleanup()
         sys.exit()
+        #copytest
 
 
