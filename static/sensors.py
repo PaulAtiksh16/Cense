@@ -33,7 +33,7 @@ def update_counter():
     print("Counter:", counter)
     print("Counterstr:", counterstr)
     
-    ssd.SSD_show(counterstr)
+#     ssd.SSD_show(counterstr)
     
     
     
@@ -43,8 +43,8 @@ def motion_detection():
     print("in motion detection")
     
     
-pir.when_motion = update_counter
-pir2.when_motion = update_counter
+    pir.when_motion = update_counter
+    pir2.when_motion = update_counter
 
 
 app = Flask(__name__, template_folder='/home/admin/Desktop/Cense2.0/templates')
@@ -68,14 +68,14 @@ def get_counter():
 #     print("Counter in task:", counterstr)
 #     ssd.SSD_show(counterstr)
 
-# ssdthread = threading.Thread(target=ssd.SSD_show, name="ssdthread", args=(counterstr,))
-# 
-# motionthread = threading.Thread(target=motion_detection, name="motionthread")
+ssdthread = threading.Thread(target=ssd.SSD_show, name="ssdthread", args=(counterstr,))
+
+motionthread = threading.Thread(target=motion_detection, name="motionthread")
 
 if __name__ == '__main__':
-#     motionthread.start()
-#     ssdthread.start()
+    motionthread.start()
+    ssdthread.start()
     app.run(debug=True, port=80, host='0.0.0.0')
 #     ssd.SSD_show(counterstr)
 
-#copytest
+#copytest1

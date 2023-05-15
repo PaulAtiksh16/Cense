@@ -122,6 +122,6 @@ class SevSegDisp():
          print('interrupted!')
          self.ssd_GPIO.cleanup()
         sys.exit()
-        #copytest
+        #copytest1
 
 
