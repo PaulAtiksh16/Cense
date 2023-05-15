@@ -1,7 +1,6 @@
 from flask import Flask, render_template, jsonify
 from gpiozero import MotionSensor
 
-
 # Initialize counter
 counter = 0
 
