@@ -9,6 +9,7 @@ class SevSegDisp():
 # print(str(get_counter()))
 # toDisplay= str(get_counter()) # numbers and digits to display
     def __init__(self):
+        print("initializing ssd")
         self.toDisplay = "0000"
 
         self.delay = 0.005 # delay between digits refresh
@@ -50,7 +51,7 @@ class SevSegDisp():
 
         # Set all pins as output
         self.ssd_GPIO.setwarnings(False)
-        for pin in display_list:
+        for pin in self.display_list:
           self.ssd_GPIO.setup(pin,self.ssd_GPIO.OUT) # setting pins for segments
         for pin in self.selDigit:
           self.ssd_GPIO.setup(pin,self.ssd_GPIO.OUT) # setting pins for digit selector
@@ -72,11 +73,14 @@ class SevSegDisp():
       sel = [0,0,0,0]
       sel[i] = 1
       self.ssd_GPIO.output(self.selDigit, sel) # activates selected digit
+      
+      print("Digit:", digit)
+      
       if digit[i].replace(".", "") == ".": # space disables digit
        self.ssd_GPIO.output(self.display_list,0)
        continue
       numDisplay = int(digit[i].replace(".", ""))
-      self.ssd_GPIO.output(display_list, self.arrSeg[numDisplay]) # segments are activated according to digit mapping
+      self.ssd_GPIO.output(self.display_list, self.arrSeg[numDisplay]) # segments are activated according to digit mapping
       if digit[i].count(".") == 0:
        self.ssd_GPIO.output(self.digitDP,1)
       else:
@@ -84,10 +88,16 @@ class SevSegDisp():
       time.sleep(self.delay)
 
     def splitToDisplay (self, toDisplay): # splits string to digits to display
+     
+     print("toDisplay:", toDisplay)
+     
      arrToDisplay=list(toDisplay)
      for i in range(len(arrToDisplay)):
       if arrToDisplay[i] == ".": arrToDisplay[(i-1)] = arrToDisplay[(i-1)] + arrToDisplay[i] # dots are concatenated to previous array element
      while "." in arrToDisplay: arrToDisplay.remove(".") # array items containing dot char alone are removed
+     
+     print("ArrToDisplay:", arrToDisplay)
+     
      return arrToDisplay
 
     # --------------------------------------------------------------------
@@ -100,9 +110,10 @@ class SevSegDisp():
 
     def SSD_show(self, displayvar="0000"):
         try:
+         self.gpio_init()
          print("Displayvar:", displayvar)
          while True:
-          showDisplay(splitToDisplay(displayvar))
+          self.showDisplay(self.splitToDisplay(displayvar))
           time.sleep(0.01)
         except KeyboardInterrupt:
          print('interrupted!')

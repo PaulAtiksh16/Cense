@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify
 from gpiozero import MotionSensor
-from seg4DigitDisplay import SevSegDisp
+from ssd_folder.seg4DigitDisplay import SevSegDisp
+import threading
 
 ssd = SevSegDisp()
 
@@ -15,6 +16,7 @@ pir2 = MotionSensor(17) #green sensor: 17
 # Define a function to read the sensor value and update the counter
 def update_counter():
     global counter
+    global counterstr
     if pir.value == 1:
         counter += 1
     if pir2.value == 1:
@@ -27,6 +29,10 @@ def update_counter():
     
     print("Counter:", counter)
     print("Counterstr:", counterstr)
+    
+    ssd.SSD_show(counterstr)
+    
+    
     
 
 # Add an event listener for the sensor pins
@@ -50,6 +56,14 @@ def get_counter():
     global counter
     return jsonify(counter=counter)
 
+# def ssdtaskfunc():
+#     global counterstr
+#     print("Counter in task:", counterstr)
+#     ssd.SSD_show(counterstr)
+# 
+# ssdthread = threading.Thread(target=ssdtaskfunc, name="ssdthread")
+
 if __name__ == '__main__':
+#     ssdthread.start()
     app.run(debug=True, port=80, host='0.0.0.0')
-    ssd.SSD_show(counterstr)
+#     ssd.SSD_show(counterstr)
