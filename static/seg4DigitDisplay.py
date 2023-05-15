@@ -39,16 +39,16 @@ GPIO.setwarnings(True)
 
 # DIGIT map as array of array ,
 #so that arrSeg[0] shows 0, arrSeg[1] shows 1, etc
-arrSeg = [[1,1,1,1,1,1,0],\
-          [0,1,1,0,0,0,0],\
-          [1,1,0,1,1,0,1],\
-          [1,1,1,1,0,0,1],\
-          [0,1,1,0,0,1,1],\
-          [1,0,1,1,0,1,1],\
-          [1,0,1,1,1,1,1],\
-          [1,1,1,0,0,0,0],\
-          [1,1,1,1,1,1,1],\
-          [1,1,1,1,0,1,1]]
+arrSeg = [[0,0,0,0,0,0,1],\
+          [1,0,0,1,1,1,1],\
+          [0,0,1,0,0,1,0],\
+          [0,0,0,0,1,1,0],\
+          [1,0,0,1,1,0,0],\
+          [0,1,0,0,1,0,0],\
+          [0,1,0,0,0,0,0],\
+          [0,0,0,1,1,1,1],\
+          [0,0,0,0,0,0,0],\
+          [0,0,0,0,1,0,0]]
 
 GPIO.output(digitDP,0) # DOT pin
 
@@ -65,15 +65,15 @@ def showDisplay(digit):
   sel = [0,0,0,0]
   sel[i] = 1
   GPIO.output(selDigit, sel) # activates selected digit
-  if digit[i].replace(".", "") == " ": # space disables digit
+  if digit[i].replace(".", "") == ".": # space disables digit
    GPIO.output(display_list,0)
    continue
   numDisplay = int(digit[i].replace(".", ""))
   GPIO.output(display_list, arrSeg[numDisplay]) # segments are activated according to digit mapping
-  if digit[i].count(".") == 1:
-   GPIO.output(digitDP,0)
-  else:
+  if digit[i].count(".") == 0:
    GPIO.output(digitDP,1)
+  else:
+   GPIO.output(digitDP,0)
   time.sleep(delay)
 
 def splitToDisplay (toDisplay): # splits string to digits to display
