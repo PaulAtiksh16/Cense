@@ -115,9 +115,9 @@ class SevSegDisp():
              print("Displayvar is None")
              displayvar = "0000"
          print("Displayvar:", displayvar)
-#          while True:
-         self.showDisplay(self.splitToDisplay(displayvar))
-         time.sleep(0.01)
+         while True:
+             self.showDisplay(self.splitToDisplay(displayvar))
+             time.sleep(0.01)
         except KeyboardInterrupt:
          print('interrupted!')
          self.ssd_GPIO.cleanup()

@@ -13,8 +13,12 @@ counterstr = ""
 pir = MotionSensor(4) #blue/white sensor: 4
 pir2 = MotionSensor(17) #green sensor: 17
 
+# ssdthread = threading.Thread(target=ssd.SSD_show, name="ssdthread", args=(counterstr,))
+
 # Define a function to read the sensor value and update the counter
 def update_counter():
+#     ssdthread.join()
+    
     print("in update")
     print("Pir1:", pir.value)
     print("Pir2:", pir.value)
@@ -32,6 +36,9 @@ def update_counter():
     
     print("Counter:", counter)
     print("Counterstr:", counterstr)
+    
+#     ssdthread.start()
+
     
 #     ssd.SSD_show(counterstr)
     
@@ -69,6 +76,7 @@ def get_counter():
 #     ssd.SSD_show(counterstr)
 
 ssdthread = threading.Thread(target=ssd.SSD_show, name="ssdthread", args=(counterstr,))
+# ssdthread = threading.Thread(target=ssd.SSD_show, name="ssdthread", args=("0021",))
 
 motionthread = threading.Thread(target=motion_detection, name="motionthread")
 
