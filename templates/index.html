@@ -1,23 +1,76 @@
-<!DOCTYPE html>
-<html>
-   <head>
-      <title>{{ title }}</title>
-      <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-      <meta http-equiv="Pragma" content="no-cache">
-      <meta http-equiv="Expires" content="0">
-   </head>
-   <body>
-      <h1>{{ title }}</h1>
-      <h2>The occupancy of the library is: <span id="counter"></span></h2>
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script>
-         $(document).ready(function() {
-            setInterval(function() {
-               $.getJSON('/counter', function(data) {
-                  $('#counter').text(data.counter);
-               });
-            }, 1000);
-         });
-      </script>
-   </body>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>CENSE</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-md bg-dark text-end">
+        <div class="container-fluid"><a class="navbar-brand" href="#">CENSE</a>
+            <div id="navcol-1" class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#">Contact the Librarians</a></li>
+                </ul>
+            </div>
+            <div></div>
+        </div>
+    </nav>
+    <div class="container">
+        <section class="py-4 py-xl-5">
+            <div class="container">
+                <div class="bg-dark border rounded border-0 border-dark overflow-hidden">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <div class="text-white p-4 p-md-5">
+                                <h2 class="fs-5 fw-bold text-white mb-3">CURRENT OCCUPANCY:</h2>
+                                <h1 class="fs-10 mb-4"><span id="counter"></span>/MAX CAPACITY</h1>
+                                
+                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                  <script>
+                                     $(document).ready(function() {
+                                        setInterval(function() {
+                                           $.getJSON('/counter', function(data) {
+                                              $('#counter').text(data.counter);
+                                           });
+                                        }, 1000);
+                                     });
+                                  </script>
+                               
+                               <div class="my-3"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 order-first order-md-last" style="min-height: 250px;"><img class="w-100 h-100 fit-cover" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fonedublin.files.wordpress.com%2F2010%2F11%2Fdublin-high-school-new-buildings-2010-19.jpg%3Fw%3D1200%26h%3D900&f=1&nofb=1&ipt=670a49359a24e8a8ab2a383f42e84338100ccebc3e53ea07932e1ec0d83fc21f&ipo=images" /></div>
+                    </div>
+                </div>
+            </div>
+            <div></div>
+        </section>
+        <h1 class="display-3 text-center"></h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="text-center"><strong><span>5 people intending to go to the library in the next 5 minutes</span></strong></h1>
+            </div>
+            <div class="col-md-6">
+                <h1 class="text-center"><strong><span>30 minutes estimated before the library closes and reaches full capacity</span></strong></h1>
+            </div>
+        </div>
+    </div>
+    <section class="py-4 py-xl-5">
+        <div class="container">
+            <div class="bg-light border rounded border-0 border-light d-flex flex-column justify-content-between flex-lg-row p-4 p-md-5">
+                <div class="pb-2 pb-lg-1">
+                    <h2 class="fw-bold mb-2">Going to the library in the next five minutes?</h2>
+                    <p class="mb-0">Click &quot;yes&quot; to let others know so they can determine if they can too!</p>
+                </div><a class="btn btn-dark fs-3 py-2 px-4" role="button" href="#" style="padding-right: 0px;padding-left: 9px;margin-bottom: 21px;margin-right: 2px;">Yes!</a>
+                <div class="my-2"></div>
+            </div>
+        </div>
+    </section>
+</body>
+
 </html>
+﻿

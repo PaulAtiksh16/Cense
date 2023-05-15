@@ -70,12 +70,12 @@ def get_counter():
     global counter
     return jsonify(counter=counter)
 
-# def ssdtaskfunc():
-#     global counterstr
-#     print("Counter in task:", counterstr)
-#     ssd.SSD_show(counterstr)
+def ssdtaskfunc():
+    global counterstr
+    print("Counter in task:", counterstr)
+    ssd.SSD_show(counterstr)
 
-ssdthread = threading.Thread(target=ssd.SSD_show, name="ssdthread", args=(counterstr,))
+ssdthread = threading.Thread(target=ssdtaskfunc, name="ssdthread")
 # ssdthread = threading.Thread(target=ssd.SSD_show, name="ssdthread", args=("0021",))
 
 motionthread = threading.Thread(target=motion_detection, name="motionthread")

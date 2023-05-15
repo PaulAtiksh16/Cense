@@ -108,7 +108,7 @@ class SevSegDisp():
     #   stable numbers display
     # --------------------------------------------------------------------
 
-    def SSD_show(self, displayvar="0000"):
+    def SSD_show(self, displayvar):
         try:
          self.gpio_init()
          if displayvar is None or displayvar == "":
@@ -118,6 +118,8 @@ class SevSegDisp():
          while True:
              self.showDisplay(self.splitToDisplay(displayvar))
              time.sleep(0.01)
+             
+             
         except KeyboardInterrupt:
          print('interrupted!')
          self.ssd_GPIO.cleanup()
