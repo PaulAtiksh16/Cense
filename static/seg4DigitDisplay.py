@@ -2,10 +2,10 @@
 import sys
 import RPi.GPIO as GPIO
 import time
-from sensors import counter
 
-print(counter)
-toDisplay="12.34" # numbers and digits to display
+# print(str(get_counter()))
+# toDisplay= str(get_counter()) # numbers and digits to display
+toDisplay = "0000"
 
 delay = 0.005 # delay between digits refresh
 
@@ -91,12 +91,14 @@ def splitToDisplay (toDisplay): # splits string to digits to display
 #   stable numbers display
 # --------------------------------------------------------------------
 
-try:
- while True:
-  showDisplay(splitToDisplay(toDisplay))
-except KeyboardInterrupt:
- print('interrupted!')
- GPIO.cleanup()
-sys.exit()
+def SSD_show(displayvar):
+    try:
+     while True:
+      showDisplay(splitToDisplay(displayvar))
+      time.sleep(0.01)
+    except KeyboardInterrupt:
+     print('interrupted!')
+     GPIO.cleanup()
+    sys.exit()
 
 

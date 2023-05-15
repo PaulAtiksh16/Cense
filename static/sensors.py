@@ -1,8 +1,10 @@
 from flask import Flask, render_template, jsonify
 from gpiozero import MotionSensor
+from seg4DigitDisplay import SSD_show
 
 # Initialize counter
 counter = 0
+counterstr = ""
 
 # Initialize motion sensors
 pir = MotionSensor(4) #blue/white sensor: 4
@@ -17,7 +19,18 @@ def update_counter():
         counter -= 1
     if counter < 0:
         counter = 0
+    
+    if 0 <= counter <= 9:
+        counterstr = "   " + str(counter)
+    elif 10 <= counter <= 99:
+        counterstr = "  " + str(counter)
+    elif 100 <= counter <= 999:
+        counterstr = " " + str(counter)
+    else:
+        counterstr = str(counter)
+    
     print(counter)
+    
 
 # Add an event listener for the sensor pins
 pir.when_motion = update_counter
@@ -42,3 +55,4 @@ def get_counter():
 
 if __name__ == '__main__':
     app.run(debug=True, port=80, host='0.0.0.0')
+    SSD_show(counterstr)
